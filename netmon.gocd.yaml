@@ -1,7 +1,7 @@
 ---
 pipelines:
   network_prod:
-    group: "Network Monitoring Pipeline"
+    group: "netmon"
     materials:
       netmon_scripts:
         type: git
