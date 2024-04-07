@@ -32,7 +32,7 @@ pipelines:
                         python3 -m venv --without-pip netmon &&
                         cd netmon &&
                         source ./bin/activate &&
-                        https://bootstrap.pypa.io/get-pip.py &&
+                        wget https://bootstrap.pypa.io/get-pip.py &&
                         python3 get-pip.py &&
                         ./bin/pip install netmiko &&
                         deactivate &&
