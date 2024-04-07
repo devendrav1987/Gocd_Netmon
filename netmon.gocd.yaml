@@ -8,7 +8,7 @@ pipelines:
         url: "https://github.com/devendrav1987/dev_netmon.git"
         branch: "main"
     timer:
-      spec: "0 8 * * 1 ? *"
+      spec: "0 */10 * * * ? *"
     stages:
       - run_network_monitoring_whitelisting:
           script:
