@@ -28,7 +28,6 @@ pipelines:
                     arguments:
                       - "-c"
                       - |
-                        source /home/go/.bashrc &&
                         rm -rf ./netmon/ &&
                         python3 -m venv --without-pip netmon &&
                         cd netmon &&
