@@ -6,7 +6,7 @@ pipelines:
       netmon_scripts:
         type: git
         url: "https://github.com/networkmonitoring/netmon.git"
-        branch: "master"
+        branch: "main"
     timer:
       spec: "0 8 * * 1 ? *"
     stages:
