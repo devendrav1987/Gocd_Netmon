@@ -11,8 +11,9 @@ pipelines:
       spec: "0 8 * * 1 ? *"
     stages:
       - run_network_monitoring_whitelisting:
-          approval:
-            type: manual
+          script:
+            - echo "Running network monitoring and whitelisting"
+          when: on_success
           clean_workspace: true
           environment_variables:
             run_mode: prod
