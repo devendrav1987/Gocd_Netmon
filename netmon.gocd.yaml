@@ -32,10 +32,6 @@ pipelines:
                         python3 -m venv --without-pip netmon &&
                         cd netmon &&
                         source ./bin/activate &&
-                        wget https://bootstrap.pypa.io/pip/3.9/get-pip.py &&
-                        python3 get-pip.py &&
-                        ./bin/pip install --upgrade pip &&
-                        ./bin/pip install boto3 requests &&
                         deactivate &&
                         cd .. &&
                         rm -rf ./dist/* &&
