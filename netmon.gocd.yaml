@@ -5,7 +5,7 @@ pipelines:
     materials:
       netmon_scripts:
         type: git
-        url: "https://github.com/networkmonitoring/netmon.git"
+        url: "https://github.com/devendrav1987/dev_netmon.git"
         branch: "main"
     timer:
       spec: "0 8 * * 1 ? *"
