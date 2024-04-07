@@ -13,8 +13,6 @@ pipelines:
       - run_network_monitoring_whitelisting:
           approval:
             type: manual
-            roles:
-              - Whitelisting-team
           clean_workspace: true
           environment_variables:
             run_mode: prod
