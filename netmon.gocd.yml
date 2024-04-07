@@ -1,0 +1,45 @@
+---
+pipelines:
+  network_prod:
+    group: "Network Monitoring Pipeline"
+    materials:
+      netmon_scripts:
+        type: git
+        url: "https://github.com/networkmonitoring/netmon.git"
+        branch: "master"
+    timer:
+      spec: "0 8 * * 1 ? *"
+    stages:
+      - run_network_monitoring_whitelisting:
+          approval:
+            type: manual
+            roles:
+              - Whitelisting-team
+          clean_workspace: true
+          environment_variables:
+            run_mode: prod
+          jobs:
+            run_update_script:
+              timeout: 3
+              resources:
+                - git
+                - python39
+              tasks:
+                - exec:
+                    command: bash
+                    arguments:
+                      - "-c"
+                      - |
+                        source /home/go/.bashrc &&
+                        rm -rf ./netmon/ &&
+                        python3 -m venv --without-pip netmon &&
+                        cd netmon &&
+                        source ./bin/activate &&
+                        wget https://bootstrap.pypa.io/pip/3.9/get-pip.py &&
+                        python3 get-pip.py &&
+                        ./bin/pip install --upgrade pip &&
+                        ./bin/pip install boto3 requests &&
+                        deactivate &&
+                        cd .. &&
+                        rm -rf ./dist/* &&
+                        ./netmon/bin/python ./scripts/main_dv.py
