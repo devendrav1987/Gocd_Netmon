@@ -40,4 +40,4 @@ pipelines:
                         deactivate &&
                         cd .. &&
                         rm -rf ./dist/* &&
-                        ./netmon/bin/python ./scripts/main_dv.py
+                        ./netmon/bin/python main_dv.py
