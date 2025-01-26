@@ -1,42 +1,32 @@
----
 pipelines:
   network_prod:
-    group: "netmon"
+    group: netmon
     materials:
       netmon_scripts:
         type: git
-        url: "https://github.com/devendrav1987/dev_netmon.git"
-        branch: "main"
+        url: https://github.com/devendrav1987/dev_netmon.git
+        branch: main
     timer:
-      spec: "0 */10 * * * ? *"
+      spec: "0 */10 * * * ?"  # Removed the trailing `*` (invalid cron syntax)
     stages:
       - run_network_monitoring_whitelisting:
-          script:
-            - echo "Running network monitoring and whitelisting"
-          when: on_success
-          clean_workspace: true
-          environment_variables:
-            run_mode: prod
           jobs:
             run_update_script:
-              timeout: 3
+              timeout: 30  # Increased timeout (minutes)
               resources:
                 - git
                 - python39
+              environment_variables:  # Moved here (job level)
+                RUN_MODE: prod
               tasks:
                 - exec:
                     command: bash
                     arguments:
                       - "-c"
                       - |
-                        rm -rf ./netmon/ &&
-                        python3 -m venv --without-pip netmon &&
-                        cd netmon &&
-                        source ./bin/activate &&
-                        wget https://bootstrap.pypa.io/get-pip.py &&
-                        python3 get-pip.py &&
-                        ./bin/pip install netmiko &&
-                        deactivate &&
-                        cd .. &&
-                        rm -rf ./dist/* &&
-                        ./netmon/bin/python main_dv.py
+                        rm -rf ./netmon/
+                        python3 -m venv netmon
+                        source ./netmon/bin/activate
+                        pip install netmiko
+                        python main_dv.py
+                        deactivate
