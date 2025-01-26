@@ -2,6 +2,6 @@ environments:
   netmon:
     pipelines:
       - network_prod
-    environment_variables:
-      secure:
+    environment_variables:  # ✅ Correct key
+      secure:  # ✅ Secure variables nested here
         SERVICE_NOW_KEY: "AES:2btlEr/ZM3KhBbTTRT8iI1lT9Qg==:ePoNJHJHJVQur5Q7jjzHT/FoizLaPqiA0riZKIStLtWatBrFFGFGFIs="
